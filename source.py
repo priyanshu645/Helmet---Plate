@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import os
 import imutils
+import gdown
 
 try:
     from tensorflow.keras.models import load_model
@@ -28,6 +29,15 @@ def load_yolo():
         st.info("CUDA is unavailable. Falling back to CPU inference.")
     return net
 
+    MODEL_URLS = {
+    "yolov3-custom_7000.weights": "https://drive.google.com/file/d/1r80O-sRrfOyivbofGRnNTp-fnpGzwAyZ/view?usp=drive_link",
+    "helmet-nonhelmet_cnn.h5": "https://drive.google.com/file/d/1CdJfgHlBItxpIQtT2pMaI3XeCC9C0jzj/view?usp=drive_link",
+}
+
+for file_name, url in MODEL_URLS.items():
+    if not os.path.exists(file_name):
+        with st.spinner(f"Downloading {file_name}..."):
+            gdown.download(url, file_name, quiet=False, fuzzy=True)
 
 missing_files = [path for path in [YOLO_WEIGHTS, YOLO_CONFIG, HELMET_MODEL] if not os.path.exists(path)]
 
