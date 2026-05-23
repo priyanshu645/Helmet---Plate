@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+temp/
+
+*.log
+python311-install.log
+
+helmet-nonhelmet_cnn.h5
+yolov3-custom_7000.weights
+
+.DS_Store
+Thumbs.db
